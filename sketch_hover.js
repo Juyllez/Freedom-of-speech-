@@ -34,7 +34,9 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(3000, 2500);
+    // createCanvas(3000, 2500);
+    createCanvas(windowWidth, windowHeight);
+
     textFont("Arial", 10);
     noStroke();
     colorMode(HSL);
@@ -109,8 +111,13 @@ function draw() {
     let offsetX = 100;
     let offsetY = 100;
 
-    let cellWidth = 15;
-    let cellHeight = 10;
+    // let cellWidth = 15;
+    // let cellHeight = 10;
+    let availableWidth = windowWidth - offsetX - 50;
+    let availableHeight = windowHeight - offsetY - 50;
+
+    let cellWidth = availableWidth / countries.length;
+    let cellHeight = availableHeight / years.length;
 
     //grid
     stroke(0);
