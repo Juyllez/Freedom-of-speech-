@@ -39,11 +39,12 @@ function setup() {
 
     textFont("Arial", 10);
     noStroke();
-    colorMode(HSL);
+    colorMode(RGB);
 
     // Länder & Jahre sammeln
     let countrySet = new Set();
     let yearSet = new Set();
+    
     for (let row of table.rows) {
         countrySet.add(row.get("Country"));
         yearSet.add(int(row.get("Year"))); // sicherstellen, dass Jahr ein int ist
@@ -81,12 +82,12 @@ function setup() {
 
     // Farben pro Kontinent
     let palette = [
-        color(359, 100, 62),   // Africa
-        color(54, 100, 50),  // America
-        color(156, 100, 50),  // Asia
-        color(312, 100, 71), // Europe
-        color(236, 100, 57), // Oceania
-        color(0, 0, 80)     // Unknown
+        color(255, 61, 64),   // Africa
+        color(255, 229, 0),  // America
+        color(0, 255, 153),  // Asia
+        color(255, 106, 226), // Europe
+        color(37, 53, 255), // Oceania
+        color(204, 204, 204)     // Unknown
     ];
     let usedContinents = {};
     let index = 0;
@@ -117,7 +118,7 @@ function draw() {
     let availableHeight = windowHeight - offsetY - 50;
 
     let cellWidth = availableWidth / countries.length;
-    let cellHeight = availableHeight / years.length;
+    let cellHeight = availableHeight / years.length * 0.8;
 
     //grid
     stroke(0);
@@ -132,6 +133,7 @@ function draw() {
     noStroke();
 
     // 📅 Jahreszahlen links
+    textSize(cellWidth * 0.2);
     fill(255);
     textAlign(RIGHT, CENTER);
     for (let j = 0; j < years.length; j++) {
@@ -140,6 +142,7 @@ function draw() {
     }
 
     // 🌍 Ländernamen oben (senkrecht)
+    textSize(cellWidth * 0.4);
     textAlign(LEFT, CENTER);
     for (let i = 0; i < countries.length; i++) {
         let x = offsetX + i * cellWidth + cellWidth / 2;
@@ -163,9 +166,13 @@ function draw() {
         let y = offsetY + (years.length - 1 - j) * cellHeight;
         let sz = map(d.score, 0, maxScore, 2, cellWidth * 0.9);
 
-        fill(continentColors[d.country]);
-        ellipse(x + cellWidth / 2, y + cellHeight / 2, sz, sz);
+        // tranparenz
+        let alpha = map(d.score, 0, maxScore, 50, 200);
+        fill(continentColors[d.country]._getRed(), continentColors[d.country]._getGreen(), continentColors[d.country]._getBlue(), alpha); 
+        // fill(continentColors[d.country], alpha);
         
+         ellipse(x + cellWidth / 2, y + cellHeight / 2, sz * 0.5, sz * 0.5);
+
         let dx = mouseX - (x + cellWidth / 2);
         let dy = mouseY - (y + cellHeight / 2);
         if (sqrt(dx * dx + dy * dy) < sz / 2) {
@@ -181,20 +188,52 @@ function draw() {
         if (hoveredData) {
             let { x, y, country, year, score } = hoveredData;
         
-            let boxWidth = 140;
-            let boxHeight = 60;
-        
-            fill(0, 200);
+            let boxWidth = cellWidth * 10;
+            let boxHeight = cellHeight * 10;
+
+            fill(100, 100, 100, 3);             
             noStroke();
-            rect(mouseX + 10, mouseY + 10, boxWidth, boxHeight, 10);
+            rect(mouseX + 10, mouseY + 10, boxWidth, boxHeight);
         
             fill(255);
             textAlign(LEFT, TOP);
-            textSize(12);
-            text(`Country: ${country}`, mouseX + 15, mouseY + 15);
-            text(`Year: ${year}`, mouseX + 15, mouseY + 30);
-            text(`Score: ${score.toFixed(2)}`, mouseX + 15, mouseY + 45);
+            textSize(cellWidth * 0.8);
+
+            text(`Country: ${country}`, mouseX + cellWidth, mouseY + cellWidth);
+            text(`Year: ${year}`, mouseX + cellWidth, mouseY + cellWidth * 2);
+            text(`Score: ${score.toFixed(2)}`, mouseX + cellWidth, mouseY + cellWidth * 3);
         }
+    }
+
+    drawLegend(); 
+}
+
+//lesen Tipp
+function drawLegend() {
+    let legendX = width - 230;
+    let legendY = 10;
+    let barWidth = 30;
+    let barHeight = 5;
+    let spacing = 0;
+
+    let continentNames = ["Africa", "America", "Asia", "Europe", "Oceania", "Unknown"];
+    let continentColorPalette = [
+        color(255, 61, 64),   // Africa
+        color(255, 229, 0),  // America
+        color(0, 255, 153),  // Asia
+        color(255, 106, 226), // Europe
+        color(37, 53, 255), // Oceania
+        color(204, 204, 204)     // Unknown
+    ];
+
+    for (let i = 0; i < continentNames.length; i++) {
+        fill(continentColorPalette[i]);
+        rect(legendX  + i * (barWidth + spacing), legendY, barWidth, barHeight);
+
+        fill(255);
+        textSize(6);
+        textAlign(LEFT, CENTER);
+        text(continentNames[i], legendX + i * (barWidth + spacing), legendY + 10);
     }
 }
 
