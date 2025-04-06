@@ -17,7 +17,7 @@ country_to_continent = {
     "Chad": "Africa", "Chile": "South America", "China": "Asia", "Colombia": "South America",
     "Comoros": "Africa", "Congo (Brazzaville)": "Africa", "Congo (Kinshasa)": "Africa",
     "Costa Rica": "North America", "Croatia": "Europe", "Cuba": "North America", "Cyprus": "Asia",
-    "Czech Republic": "Europe", "Denmark": "Europe", "Djibouti": "Africa", "Dominican Republic": "North America",
+    "Czechia": "Europe", "Denmark": "Europe", "Djibouti": "Africa", "Dominican Republic": "North America",
     "Ecuador": "South America", "Egypt": "Africa", "El Salvador": "North America", "Equatorial Guinea": "Africa",
     "Eritrea": "Africa", "Estonia": "Europe", "Eswatini": "Africa", "Ethiopia": "Africa",
     "Fiji": "Oceania", "Finland": "Europe", "France": "Europe", "Gabon": "Africa", "Gambia": "Africa",
