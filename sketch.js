@@ -150,7 +150,7 @@ function draw() {
 
         let x = offsetX + i * cellWidth;
         let y = offsetY + (years.length - 1 - j) * cellHeight;
-        let sz = map(d.score, 0, maxScore, 2, cellWidth * 0.9);
+        let sz = map(d.score, 0, maxScore, 2, cellWidth * 1.2);
 
         fill(continentColors[d.country]);
         ellipse(x + cellWidth / 2, y + cellHeight / 2, sz, sz);
