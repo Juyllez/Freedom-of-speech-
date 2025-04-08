@@ -29,7 +29,7 @@ let continentColors = {};
 
 let hoveredData = null; // To store the hovered data
 
-let rowSpacing = 6;
+let rowSpacing = 2;
 
 function preload() {
     table = loadTable("BLIBLA.csv", "csv", "header");
@@ -247,7 +247,7 @@ function draw() {
           let rectWidth = map(dataPoint.score, 0, maxScore, 2, cellWidth);
           let rectHeight = cellHeight;
 
-      let alpha = map(dataPoint.score, 0, maxScore, 50, 200);
+      // let alpha = map(dataPoint.score, 0, maxScore, 50, 200);
       fill(
           continentColors[country]._getRed(),
           continentColors[country]._getGreen(),
@@ -257,7 +257,7 @@ function draw() {
 
       rect(xStart, y + (cellHeight - rectHeight) / 2, rectWidth, rectHeight);
 
-      xStart += rectWidth + 0.3; //gap 0.3px
+      xStart += rectWidth; //gap 0.3px
       }
     }
       

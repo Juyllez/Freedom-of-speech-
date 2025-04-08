@@ -166,12 +166,14 @@ function draw() {
         let y = offsetY + (years.length - 1 - j) * cellHeight;
         let sz = map(d.score, 0, maxScore, 2, cellWidth * 0.9);
 
+        stroke(continentColors[d.country]);
+        strokeWeight(0.8);
         // tranparenz
         let alpha = map(d.score, 0, maxScore, 50, 200);
         fill(continentColors[d.country]._getRed(), continentColors[d.country]._getGreen(), continentColors[d.country]._getBlue(), alpha); 
         // fill(continentColors[d.country], alpha);
-        
-         ellipse(x + cellWidth / 2, y + cellHeight / 2, sz * 0.5, sz * 0.5);
+
+        ellipse(x + cellWidth / 2, y + cellHeight / 2, sz * 0.5, sz * 0.5);
 
         let dx = mouseX - (x + cellWidth / 2);
         let dy = mouseY - (y + cellHeight / 2);
@@ -227,6 +229,7 @@ function drawLegend() {
     ];
 
     for (let i = 0; i < continentNames.length; i++) {
+        noStroke();
         fill(continentColorPalette[i]);
         rect(legendX  + i * (barWidth + spacing), legendY, barWidth, barHeight);
 
