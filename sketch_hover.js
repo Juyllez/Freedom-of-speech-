@@ -189,11 +189,11 @@ function draw() {
             let { x, y, country, year, score } = hoveredData;
         
             let boxWidth = cellWidth * 10;
-            let boxHeight = cellHeight * 10;
+            let boxHeight = cellHeight * 13;
 
-            fill(100, 100, 100, 3);             
+            fill(255, 255, 255, 0.7);             
             noStroke();
-            rect(mouseX + 10, mouseY + 10, boxWidth, boxHeight);
+            rect(mouseX + 10, mouseY + 10, boxWidth, boxHeight, 8);
         
             fill(255);
             textAlign(LEFT, TOP);
