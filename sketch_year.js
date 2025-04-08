@@ -102,6 +102,16 @@ function setup() {
         }
         continentColors[row.get("Country")] = usedContinents[continent];
     }
+    
+    //summe
+    let yearlyTotals = {};
+
+    for (let year of years) {
+        yearlyTotals[year] = data
+            .filter(d => d.year === year)
+            .reduce((sum, d) => sum + d.score, 0); // 计算该年的总和
+    }
+    window.yearlyTotals = yearlyTotals;
 
     noLoop();
 }
@@ -144,17 +154,35 @@ function draw() {
     }
 
     // 🌍 Ländernamen oben (senkrecht)
-    textSize(cellWidth * 0.4);
-    textAlign(LEFT, CENTER);
-    for (let i = 0; i < countries.length; i++) {
-        let x = offsetX + i * cellWidth + cellWidth / 2;
-        let y = offsetY - 10;
+    // textSize(cellWidth * 0.4);
+    // textAlign(LEFT, CENTER);
+    // for (let i = 0; i < countries.length; i++) {
+    //     let x = offsetX + i * cellWidth + cellWidth / 2;
+    //     let y = offsetY - 10;
 
-        push();
-        translate(x, y);
-        rotate(-PI / 2);
-        text(countries[i], 0, 0);
-        pop();
+    //     push();
+    //     translate(x, y);
+    //     rotate(-PI / 2);
+    //     text(countries[i], 0, 0);
+    //     pop();
+    // }
+    //📏
+    let maxTotalScore = Math.max(...Object.values(window.yearlyTotals));
+    let axisXStart = offsetX;
+    let axisXEnd = windowWidth - offsetX; 
+    let axisY = offsetY - 20;
+    let tickCount = 10;
+    stroke(255);
+    line(axisXStart, axisY, axisXEnd, axisY);
+    textSize(cellWidth * 0.4);
+    textAlign(CENTER, CENTER);
+    for (let t = 0; t <= tickCount; t++) {
+      let tickX = map(t, 0, tickCount, axisXStart, axisXEnd);
+      let tickValue = (maxTotalScore * t / tickCount).toFixed(0);
+      line(tickX, axisY - 5, tickX, axisY + 5);
+      noStroke();
+      fill(255);
+      text(tickValue, tickX, axisY + 15);
     }
 
     // ⚪ Datenpunkte zeichnen
