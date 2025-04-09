@@ -18,7 +18,7 @@ let continentColors = {
 };
 
 function preload() {
-    table = loadTable("BLIBLA.csv", "csv", "header");
+    table = loadTable('BLIBLA.csv', 'csv', 'header');
 }
 
 function setup() {
@@ -121,14 +121,14 @@ function draw() {
 
             let radius = map(totalScore, 0, maxTotalScore, 1, 100);
             
-            let y = timelineY - spacing * 2.5 + spacing * i;
+            let y = timelineY - spacing * 4.5 + spacing * i * 2.5;
 
             let col = continentColors[continent];
 
             stroke(col[0], col[1], col[2]);
             strokeWeight(0.8);
             fill(col[0], col[1], col[2], 100);            
-            ellipse(x, 200, radius * 2);
+            ellipse(x, y, radius * 2);
             // rect(x, y, 1, radius * 2);
             // rect(x, currentY - radius, 1, radius);
             // currentY -= radius; 

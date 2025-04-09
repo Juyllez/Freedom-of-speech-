@@ -32,7 +32,7 @@ let hoveredData = null; // To store the hovered data
 let rowSpacing = 2;
 
 function preload() {
-    table = loadTable("BLIBLA.csv", "csv", "header");
+    table = loadTable('BLIBLA.csv', 'csv', 'header');
 }
 
 function setup() {

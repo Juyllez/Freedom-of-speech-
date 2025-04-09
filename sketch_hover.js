@@ -30,15 +30,21 @@ let continentColors = {};
 let hoveredData = null; // To store the hovered data
 
 function preload() {
-    table = loadTable("BLIBLA.csv", "csv", "header");
+  table = loadTable('BLIBLA.csv', 'csv', 'header');
     console.log("Columns: ", table.columns);
-    console.log("Rows: ", table.rows.length);
+    console.log("Rows: ", table.rows.length);  
 }
 
 function setup() {
     // createCanvas(3000, 2500);
     createCanvas(windowWidth, windowHeight);
-
+    for (let row of table.rows) {
+      console.log(row.get("Country"), row.get("Continent"), row.get("FreedomScore"), row.get("Year"));
+    }
+  
+    console.log("Columns: ", table.columns);
+    console.log("Rows: ", table.getRowCount());
+  
     textFont("Arial", 10);
     noStroke();
     colorMode(RGB);
