@@ -31,6 +31,8 @@ let hoveredData = null; // To store the hovered data
 
 function preload() {
     table = loadTable("BLIBLA.csv", "csv", "header");
+    console.log("Columns: ", table.columns);
+    console.log("Rows: ", table.rows.length);
 }
 
 function setup() {

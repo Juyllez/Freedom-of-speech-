@@ -121,38 +121,18 @@ function draw() {
 
             let radius = map(totalScore, 0, maxTotalScore, 1, 100);
             
-            // let y = timelineY - spacing * 2.5 + spacing * i;
+            let y = timelineY - spacing * 2.5 + spacing * i;
 
             let col = continentColors[continent];
 
             stroke(col[0], col[1], col[2]);
             strokeWeight(0.8);
-            // fill(col[0], col[1], col[2], 100);            
-            // ellipse(x, y, radius * 2);
+            fill(col[0], col[1], col[2], 100);            
+            ellipse(x, 200, radius * 2);
             // rect(x, y, 1, radius * 2);
-            rect(x, currentY - radius, 1, radius);
-            currentY -= radius; 
+            // rect(x, currentY - radius, 1, radius);
+            // currentY -= radius; 
 
         }
     }
-
-    drawLegend();
 }
-
-// lesen Tipp
-// function drawLegend() {
-//     let x = 30;
-//     let y = 30;
-//     let size = 15;
-//     textAlign(LEFT, CENTER);
-//     textSize(12);
-//     for (let continent in continentColors) {
-//         let col = continentColors[continent];
-//         fill(col[0], col[1], col[2], 180);
-//         noStroke();
-//         ellipse(x, y, size);
-//         fill(255);
-//         text(continent, x + 20, y);
-//         y += 25;
-//     }
-// }
